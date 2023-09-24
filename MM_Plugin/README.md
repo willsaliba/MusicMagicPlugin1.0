@@ -17,7 +17,10 @@ Ensure AI_Model is active and start making requests!
 
 
 ----- Debugging -----  
-(have not tested this plugin on other OS so may need to create new audio plugin)  
+Cannot upload Build file since it's too large & is specifc to MacOS.
+When you build the project in projucer it should create this file anyway 
+but incase you need to create a new juce project just copy all the code in the Source File
+
 
 Ensure in the settings of the projucer project:  
 
