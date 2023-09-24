@@ -15,21 +15,21 @@ which is then converted to an mp3 file and returned to the plugin which the user
 
 Generation times will depend on audio clips lengths & your computers architecture.
 
-# INSTRUCTIONS TO START USING MUSIC MAGIC PLUGIN
+# INSTRUCTIONS TO USE MUSIC MAGIC PLUGIN
 
--- ENSURE AI_MODEL IS SETUP & ACTIVE --
+-- ENSURE AI_MODEL IS SETUP & ACTIVE --  
 For instructions see README2.md in the AI_Model folder
 
--- ENSURE PLUGIN IS COMPLIED AS VST3 --
+-- ENSURE PLUGIN IS COMPLIED AS VST3 --  
 For instructions see README.md in the Plugin folder
 
 # TECHNICAL DETAILS
 
--- PLUGIN --
+-- PLUGIN --  
 The plugin is built in C++ using the JUCE framework suited for creating audio applications.
 It makes requests to the model by calling the AI_Model/plugin_requests.py file and passing parameters in the command line
 
--- Fine-tuned Model --
+-- Fine-tuned Model --  
 Our model is based on the Riffusion model, which itself is an altered version of Stable Diffusion model (image generator), and 
 creates music by generating spectrograms, which are image representations of audio.
 
