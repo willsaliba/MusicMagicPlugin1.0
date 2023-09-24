@@ -1,0 +1,76 @@
+import warnings
+import os
+import sys 
+from pydub import AudioSegment
+import base64
+from scripts.generate import generate_without_input_audio as riff_generate
+from scripts.generate import generate_with_input_audio as riff_replace
+from scripts.inpaint import riff_extend
+from scripts.inpaint import riff_infill
+
+#ensuring model can be run by plugin
+warnings.simplefilter("ignore")
+os.environ['PATH'] += ":/Users/willsaliba/opt/anaconda3/envs/riffusion/bin" #!!! have to set path to your virtual environment 
+original_stdout = sys.stdout 
+sys.stdout = open(os.devnull, 'w')
+path_to_curr_dir = "/Users/willsaliba/Documents/Topics/MusicMagic1.0/AI_Model" #!!! have to set path to your AI_Model folder
+
+
+
+# extracting arguments from command line
+prompt = sys.argv[1].strip('"')
+action = sys.argv[2].strip('"')
+random = sys.argv[3].strip('"')
+firstPath = sys.argv[4].strip('"')
+secPath = sys.argv[5].strip('"')
+time = sys.argv[6].strip('"')
+side = sys.argv[7].strip('"')
+firstStart = sys.argv[8].strip('"')
+firstEnd = sys.argv[9].strip('"')
+secStart = sys.argv[10].strip('"')
+secEnd = sys.argv[11].strip('"')
+
+newTrackPath = ""
+path1_extension = os.path.splitext(firstPath)[1][1:]
+path2_extension = os.path.splitext(secPath)[1][1:]
+
+#calling respective action
+if action == "Generate": 
+    newTrackPath = riff_generate(prompt, random)
+
+else:
+    #trimming first input segment if needed
+    if int(firstStart) != 0 or int(firstEnd) != 100 :
+        firstSegment = AudioSegment.from_file(firstPath)
+        startDurationToCut = (len(firstSegment) * (int(firstStart) / 100))
+        endDurationToCut = (len(firstSegment) * ((100 - int(firstEnd)) / 100))
+        trimmed_firstSegment = firstSegment[startDurationToCut:(len(firstSegment) - endDurationToCut)]
+        #save trimmed segment to updated path
+        firstPath = os.path.join(path_to_curr_dir, f"outputs/firstSegment.{path1_extension}")
+        trimmed_firstSegment.export(firstPath, format=path1_extension)
+
+    if action == "Replace": newTrackPath = riff_replace(prompt, random, firstPath)
+
+    elif action == "Extend": newTrackPath = riff_extend(prompt, firstPath, time, side)
+
+    elif action == "Fill": 
+        #trimming second input segment if needed
+        if secStart != 0 or secEnd != 100 :
+            secSegment = AudioSegment.from_file(secPath)
+            startDurationToCut = (len(secSegment) * (int(secStart) / 100))
+            endDurationToCut = (len(secSegment) * ((100 - int(secEnd)) / 100))
+            trimmed_secSegment = secSegment[startDurationToCut:(len(secSegment) - endDurationToCut)]
+            #save trimmed segment to updated path
+            secPath = os.path.join(path_to_curr_dir, f"outputs/secSegment.{path2_extension}")
+            trimmed_secSegment.export(secPath, format=path2_extension)
+
+        newTrackPath = riff_infill(prompt, firstPath, secPath, time)
+
+#reset teriminal
+sys.stdout = original_stdout
+
+#print result so plugin can capture it
+if newTrackPath == "":
+    print("---REACHED END BUT FAILED---")
+else:
+    print(newTrackPath)
