@@ -23,7 +23,7 @@ For instructions see README2.md in the AI_Model folder
 -- ENSURE PLUGIN IS COMPLIED AS VST3 --  
 For instructions see README.md in the Plugin folder
 
--- THEN --
+-- THEN --  
 Open the plugin in your desired DAW & start generating!
 
 # TECHNICAL DETAILS
