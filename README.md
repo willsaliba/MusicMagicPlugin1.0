@@ -11,7 +11,7 @@ Since the plugin is built as a VST3 it can be opened in any digital audio workst
 and inputs may be any waveform format (mp3, wav, aif).
 
 Once the plugin makes a request, our fine-tuned model handles the request & produces the desired spectrogram 
-which is then converted to an mp3 file and returned to the plugin which the user can then use in their DAW
+which is then converted to an mp3 file and returned to the plugin which the user can then use in their DAW.
 
 Generation times will depend on audio clips lengths & your computers architecture.
 
@@ -37,4 +37,4 @@ Our model is based on the Riffusion model, which itself is an altered version of
 creates music by generating spectrograms, which are image representations of audio.
 
 Our model uses the parameters from the plugin to provide the user with a high level of control in the way music is generated
-by the Riffusion model
+by the Riffusion model.
