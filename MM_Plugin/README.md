@@ -17,9 +17,9 @@ Ensure AI_Model is active and start making requests!
 
 
 ----- Debugging -----  
-Cannot upload Build file since it's too large & is specifc to MacOS.
+Cannot upload Builds file since it's too large & is specifc to MacOS.
 When you build the project in projucer it should create this file anyway 
-but incase you need to create a new juce project just copy all the code in the Source File
+but incase you need to create a new juce project just copy all the code in the Source file and  
 
 
 Ensure in the settings of the projucer project:  
@@ -30,5 +30,5 @@ Ensure in the settings of the projucer project:
     - Plugin MIDI Output
     - Plugin Editor Requires Keyboard Focus
 
-    In preprocessor definitions you have:
-    * JUCE_MODAL_LOOPS_PERMITTED=1 
+    In preprocessor definitions you have:  
+    JUCE_MODAL_LOOPS_PERMITTED=1 
