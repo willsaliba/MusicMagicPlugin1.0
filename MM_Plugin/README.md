@@ -30,3 +30,6 @@ in the Source file and ensure in the settings of the projucer project:
 
     In preprocessor definitions you have:  
     JUCE_MODAL_LOOPS_PERMITTED=1 
+
+Note while plugin is compiled as a VST3 and thus should usable in any DAW, testing was only
+performed in Ableton Live 11.
